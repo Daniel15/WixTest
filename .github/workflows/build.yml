@@ -1,0 +1,33 @@
+on:
+  push:
+  pull_request:
+
+name: "Build"
+jobs:
+  windows-2016:
+    name: "windows-2016"
+    runs-on: windows-2016
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: "Setup MSBuild"
+        uses: warrenbuckley/Setup-MSBuild@v1
+
+      - name: "Build the Windows installer"
+        run: MSBuild.exe WixTest.sln /p:Configuration=Release
+        shell: cmd
+
+  windows-2019:
+    name: "windows-2019"
+    runs-on: windows-2019
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: "Setup MSBuild"
+        uses: warrenbuckley/Setup-MSBuild@v1
+
+      - name: "Build the Windows installer"
+        run: MSBuild.exe WixTest.sln /p:Configuration=Release
+        shell: cmd
